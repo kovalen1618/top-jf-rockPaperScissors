@@ -22,8 +22,6 @@ function getComputerChoice() {
 // Player inputs must be case-insensitive
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toUpperCase();
-    console.log(playerSelection);
-    console.log(computerSelection);
 
     // Algorithm
     if (playerSelection === computerSelection) {
@@ -39,5 +37,31 @@ function playRound(playerSelection, computerSelection) {
     };
 };
 
+// Game function
+// Play 5 rounds that are kept score and reports a winner or loser at the end
+function rockPaperScissorsGame() {
+    let status;
+    // Make sure variables are declared with number if using ++ later on
+    let playerScore = 0;
+    let computerScore = 0;
+
+    for (let i = 0; i < 5; i++) {
+        status = playRound(playerChoice, getComputerChoice());
+        console.log(status);
+
+        if (status.includes('You Lose')) {
+            computerScore++;
+        } else {
+            playerScore++;
+        }
+    }
+
+    if (playerScore < computerScore) {
+        return 'Game Over, You Lose!'
+    } else {
+        return 'You Won the Game!'
+    }
+}
+
 // Press F5 to run Debug Console in VSC
-console.log(playRound(playerChoice, getComputerChoice()));
+console.log(rockPaperScissorsGame());
