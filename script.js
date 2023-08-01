@@ -1,8 +1,7 @@
-// Played against computer
-
-// Player selection
-let playerChoice = 'RoCK';
-
+// Select all selection buttons
+const selections = document.querySelectorAll('.selection');
+// Select Resultss div
+const results = document.getElementById('results');
 
 // Randomly either return 'Rock', 'Paper', or 'Scissors' from the computer
 function getComputerChoice() {
@@ -17,51 +16,78 @@ function getComputerChoice() {
     };
 };
 
+let playerChoice = '';
+// Make sure variables are declared with number if using ++ later on
+let playerScore = 0;
+let computerScore = 0;
+console.log(playerScore)
+
+if (playerScore < 5) {
+    // selections.forEach(selection => selection.addEventListener('click', playRound));
+    selections.forEach(selection => selection.addEventListener('click', playRound));
+} else {
+        results.innerText = "YOU WON THE GAME!";
+}
+
 // Play round of Rock, Paper, Scissors
 // Takes parameters: playerSelection and computerSelection then return win/lose message
 // Player inputs must be case-insensitive
-function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.toUpperCase();
+function playRound(e) {
+    playerChoice = e.target.innerText.toUpperCase();
+    computerSelection = getComputerChoice();
 
-    // Algorithm
-    if (playerSelection === computerSelection) {
-        return 'TIE!';
-    } else if (playerSelection === 'ROCK' && computerSelection === 'PAPER') {
-        return 'You Lose! Paper beats Rock!'
-    } else if (playerSelection === 'PAPER' && computerSelection === 'SCISSORS') {
-        return 'You Lose! Scissors beats Paper!'
-    } else if (playerSelection === 'SCISSORS' && computerSelection === 'ROCK') {
-        return 'You Lose! Rock beats Scissors!'
+    if (playerChoice === computerSelection) {
+        results.innerText = 'TIE!';
+    } else if (playerChoice === 'ROCK' && computerSelection === 'PAPER') {
+        results.innerText = 'You Lose! Paper beats Rock!';
+        computerScore++;
+    } else if (playerChoice === 'PAPER' && computerSelection === 'SCISSORS') {
+        results.innerText = 'You Lose! Scissors beats Paper!';
+        computerScore++;
+    } else if (playerChoice === 'SCISSORS' && computerSelection === 'ROCK') {
+        results.innerText = 'You Lose! Rock beats Scissors!';
+        computerScore++;
     } else {
-        return 'You Win!'
+        results.innerText = 'You Win this Round!';
+        playerScore++;
     };
 };
 
-// Game function
-// Play 5 rounds that are kept score and reports a winner or loser at the end
-function rockPaperScissorsGame() {
-    let status;
-    // Make sure variables are declared with number if using ++ later on
-    let playerScore = 0;
-    let computerScore = 0;
 
-    for (let i = 0; i < 5; i++) {
-        status = playRound(playerChoice, getComputerChoice());
-        console.log(status);
+// // Game function
+// // Play 5 rounds that are kept score and reports a winner or loser at the end
+// function rockPaperScissorsGame() {
+//     let status;
+//     // Make sure variables are declared with number if using ++ later on
+//     let playerScore = 0;
+//     let computerScore = 0;
 
-        if (status.includes('You Lose')) {
-            computerScore++;
-        } else {
-            playerScore++;
-        }
-    }
+    // for (let i = 0; i < 5; i++) {
+    //     status = playRound(playerChoice, getComputerChoice());
+    //     console.log(status);
 
-    if (playerScore < computerScore) {
-        return 'Game Over, You Lose!'
-    } else {
-        return 'You Won the Game!'
-    }
-}
+    //     if (status.includes('You Lose')) {
+    //         computerScore++;
+    //     } else {
+    //         playerScore++;
+    //     }
+    // }
 
-// Press F5 to run Debug Console in VSC
-console.log(rockPaperScissorsGame());
+//     status = playRound(playerChoice, getComputerChoice());
+//     return console.log(status);
+
+//     if (status.includes('You Lose')) {
+//         computerScore++;
+//     } else {
+//         playerScore++;
+//     }
+
+//     // if (playerScore < computerScore) {
+//     //     return 'Game Over, You Lose!'
+//     // } else {
+//     //     return 'You Won the Game!'
+//     // }
+// }
+
+// // Press F5 to run Debug Console in VSC
+// console.log(rockPaperScissorsGame());
